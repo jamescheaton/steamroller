@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "betfair_analysis"
+version = "0.1.0"
+description = "Betfair exchange data analysis utilities"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+  "betfair-data",
+  "matplotlib",
+  "numpy",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["betfair_analysis*"]

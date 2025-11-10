@@ -1,0 +1,12 @@
+data/*
+*.pkl
+__pycache__/
+*.pyc
+
+# egg-info and build artifacts
+*.egg-info/
+*.egg-info
+*.egg
+.eggs/
+build/
+dist/
