@@ -23,7 +23,6 @@ class OddsExtractor:
     def save_odds(self, data_file: str, output_pickle: str = None):
 
         print("Processing data file:", data_file)
-        print("Hello")
         matches = {}
         for file in bfd.Files([data_file]):
             for market in file:
@@ -32,17 +31,15 @@ class OddsExtractor:
                 market_name = market.market_name
                 pub_time = market.publish_time
 
-                print(market_name)
-                if market_name.contains(self.team):
-                    print("Processing market for team:", market_name)
-
                 # only home/away games for TEAM_1
                 if self.home_only and not market.event_name.startswith(f"{self.team} v "):
                     continue
-                if not market_name.contains(self.team):
+                elif not market.event_name.startswith(f"{self.team} v ") and not market.event_name.endswith(f" v {self.team}"):
                     continue
                 if self.event_type not in market_name:
                     continue
+
+                print("Processing market for team:", market.event_name)
 
 
                 key = f"{market.event_name} - {market.market_time}"
@@ -74,4 +71,3 @@ class OddsExtractor:
         with open(output_pickle, "wb") as f:
             pickle.dump(matches, f)
         print(f"Saved odds data to {output_pickle}")
-
